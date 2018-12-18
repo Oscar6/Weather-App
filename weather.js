@@ -1,23 +1,49 @@
-$(function () {
+const apiKey = "538b6b2c93c624e744e7589cec1a735d";
 
-    var url = 'https://api.openweathermap.org/data/2.5/forecast?zip=77627,us';
-    var apiKey = '538b6b2c93c624e744e7589cec1a735d';
-    var searchInput = document.getElementById("search-city");
+let searchButton = document.getElementById("search-btn");
+let searchInput = document.getElementById("search-city");
+let cityName = document.getElementById("city-name");
+let icon = document.getElementById("icon");
+let temperature = document.getElementById("temp");
+let humidity = document.getElementById("humid");
+let wind = document.getElementById("wind");
 
-    $.get(url + '&appid='  + apiKey)
-        .done((result) => {
-console.log(result)
-            var celsius = result.main.temp - 273.15;
+searchButton.addEventListener("click", weatherDetails);
+searchInput.addEventListener("keyup", pressedEnter);
 
-            console.log(celsius);
+function pressedEnter(event) {
+  if (event.key === "Enter") {
+    weatherDetails();
+  }
+}
 
-            var degCel = Math.floor(celsius);
 
-            var degF = degCel * 1.8 + 32;
+function weatherDetails() {
+    if (searchInput.value === "") {
+    
+    }else {
+      let searchLink = "https://api.openweathermap.org/data/2.5/weather?q=" + searchInput.value + "&appid=" + apiKey;
+        xhrAsync(searchLink, jsonResponse);
+    }
+}
 
-            var degF2 = Math.floor(degF);
-            console.log(degF2);
+function jsonResponse(response) {
+    let jsonObject = JSON.parse(response);
+    cityName.innerHTML = jsonObject.name;
+    icon.src = "http://openweathermap.org/img/w/" + jsonObject.weather[0].icon + ".png";
+    temperature.innerHTML = Math.floor(1.8 * (jsonObject.main.temp - 273.15)) + 32 + "° F";
+    humidity.innerHTML = "Humidity: " + jsonObject.main.humidity + "%";
+    wind.innerHTML = "Wind Speed: " + Math.floor(jsonObject.wind.speed * 3600 /1610.3 * 1000)/1000 + " mph" + "<br/>";
+}
 
-            $('#temp').html(`${degF2}º`);
-        })
-});
+
+function xhrAsync(url, callback){
+    console.log("weather app working");
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = () => { 
+        if (xhr.readyState == 4 && xhr.status == 200)
+            callback(xhr.responseText);
+    }
+    xhr.open("GET", url, true); 
+    xhr.send();
+}

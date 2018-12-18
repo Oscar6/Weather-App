@@ -23,16 +23,33 @@
 </head>
 
 <body>
-    Weather App
+    <div class="header">Weather App</div>
     
-    <div class="search">
-        <form class="form-inline active-cyan-4">
-            <input class="form-control form-control-sm mr-3 w-50" type="text" placeholder="Enter City" aria-label="Enter City" id="search-city">
-            <i class="fa fa-search" aria-hidden="true"></i>
-        </form>
-    </div>
+    <div class="container">
+        <div class="search">
+            <form class="form-inline active-cyan-4">
+                <input class="form-control form-control-sm mr-3 w-20" type="text" placeholder="Enter City" aria-label="Enter City" id="search-city">
+                <a id='search-btn' href='#'><i class="fa fa-search ml-1"></i></a>
+            </form>
+        </div>
 
-    <div id="temp"></div>
+        <div class="city-icon">
+            <div class="city-icon-holder">
+                <div id="city-name" style="color: cyan"></div>
+                <img src="" alt="" id="icon">
+            </div>
+        </div>
+
+        <div class='temperature'>
+            <div id="temp"></div>
+        </div>
+
+        <div id='humid'></div>
+
+        <div id='wind'></div>
+    </div>
+    
+
 
     <!-- Optional JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
