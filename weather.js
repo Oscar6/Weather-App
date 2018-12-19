@@ -33,7 +33,7 @@ function jsonResponse(response) {
     icon.src = "http://openweathermap.org/img/w/" + jsonObject.weather[0].icon + ".png";
     temperature.innerHTML = Math.floor(1.8 * (jsonObject.main.temp - 273.15)) + 32 + "° F";
     humidity.innerHTML = "Humidity: " + jsonObject.main.humidity + "%";
-    wind.innerHTML = "Wind Speed: " + Math.floor(jsonObject.wind.speed * 3600 /1610.3 * 1000)/1000 + " mph" + "<br/>";
+    wind.innerHTML = "Wind Speed: " + Math.floor(jsonObject.wind.speed * 3600 / 1610.3 * 1000/1000) + " mph" + "<br/>";
 }
 
 
